@@ -3,38 +3,74 @@ package com.kaikeba.bean;
 import java.util.Objects;
 
 /**
- * 用户类，描述属性
+ * 用户类，描述了用于存储的人脸相关信息
  */
 public class User {
-    //标识
+    //用户的标识
     private int id;
-    //人脸标识
+    //用户的人脸标识
     private String face_id;
-    //姓名
+    //用户姓名
     private String userName;
-    //备注
+    //用户的备注
     private String description;
-    //录入城市
+    //首次被录入的城市
     private String city;
-    //上次进店时间
+    //录入的次数
+    private int count;
+    //上一次进店的时间
     private long loginTime;
 
-    //alt insert生成
+    //alt+insert
+    // 生成了：
     //无参构造器
     //全参构造器
-    //get and aet
+    //get an set
     //toString
     //equals and hashcode
     public User() {
     }
 
-    public User(int id, String face_id, String userName, String description, String city, long loginTime) {
+    public User(int id, String face_id, String userName, String description, String city, int count, long loginTime) {
         this.id = id;
         this.face_id = face_id;
         this.userName = userName;
         this.description = description;
         this.city = city;
+        this.count = count;
         this.loginTime = loginTime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                count == user.count &&
+                loginTime == user.loginTime &&
+                Objects.equals(face_id, user.face_id) &&
+                Objects.equals(userName, user.userName) &&
+                Objects.equals(description, user.description) &&
+                Objects.equals(city, user.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, face_id, userName, description, city, count, loginTime);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", face_id='" + face_id + '\'' +
+                ", userName='" + userName + '\'' +
+                ", description='" + description + '\'' +
+                ", city='" + city + '\'' +
+                ", count=" + count +
+                ", loginTime=" + loginTime +
+                '}';
     }
 
     public int getId() {
@@ -77,41 +113,19 @@ public class User {
         this.city = city;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public long getLoginTime() {
         return loginTime;
     }
 
     public void setLoginTime(long loginTime) {
         this.loginTime = loginTime;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", face_id='" + face_id + '\'' +
-                ", userName='" + userName + '\'' +
-                ", description='" + description + '\'' +
-                ", city='" + city + '\'' +
-                ", loginTime=" + loginTime +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id &&
-                loginTime == user.loginTime &&
-                Objects.equals(face_id, user.face_id) &&
-                Objects.equals(userName, user.userName) &&
-                Objects.equals(description, user.description) &&
-                Objects.equals(city, user.city);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, face_id, userName, description, city, loginTime);
     }
 }
